@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
 namespace TakumiTest1
 {
@@ -21,10 +15,26 @@ namespace TakumiTest1
             this.day = day;
         }
 
-        protected int getLunarCalender()
+        protected (int, int) GetLunisolarCalender()
         {
-        JapaneseLunisolarCalendar jpnLunarlCal = new JapaneseLunisolarCalendar();
-        int lunarMonth = jpnLunarlCal.GetMonth
+            var jpnLunisolarlCal = new JapaneseLunisolarCalendar();
+            var dataTime = new DateTime(year, month, day);
+
+            int lunisolarMonth = jpnLunisolarlCal.GetMonth(dataTime);
+            int lunisolarDay = jpnLunisolarlCal.GetDayOfMonth(dataTime);
+
+            int leapMonth = jpnLunisolarlCal.GetLeapMonth(
+                jpnLunisolarlCal.GetYear(dataTime),
+                jpnLunisolarlCal.GetEra(dataTime)
+                );
+
+            //閏月含む場合の月を補正
+            if ((leapMonth > 0) && (lunisolarMonth - leapMonth >= 0))
+            {
+                lunisolarMonth = lunisolarMonth - 1;              //旧暦月の補正
+            }
+
+            return (lunisolarMonth, lunisolarDay);
         }
 
     }
