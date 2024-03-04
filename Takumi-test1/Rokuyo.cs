@@ -2,10 +2,12 @@
 {
     internal class Rokuyo : LunisolarCalender
     {
+        //コンストラクタ
         public Rokuyo(int year, int month, int day) : base(year, month, day)
         {
         }
 
+        //六曜の一覧
         enum RokuyoData
         {
             大安,
@@ -16,13 +18,19 @@
             仏滅
         }
 
+        /// <summary>
+        /// 旧暦から六曜を求める関数
+        /// </summary>
+        /// <returns>入力された年月日の六曜</returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public string RokuyoResult()
         {
-            int month = GetLunisolarCalender().Item1;
-            int day = GetLunisolarCalender().Item2;
+            int month = GetLunisolarCalender().Item1;   //旧暦の月を代入
+            int day = GetLunisolarCalender().Item2;     //旧暦の日を代入
 
-            int rokuyoIndex = (month + day) % 6; // 六曜は7日周期で繰り返すため、6で割った余りを使う
+            int rokuyoIndex = (month + day) % 6;    //旧暦から六曜を求める計算
 
+            //計算結果(余りの値)から対応する六曜を返す処理
             switch (rokuyoIndex)
             {
                 case 0:

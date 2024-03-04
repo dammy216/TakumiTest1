@@ -4,6 +4,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        //年の入力
         Console.WriteLine("年を入力してください");
         int year = int.Parse(Console.ReadLine());
         if (year < 1960 || year > 2050)
@@ -12,6 +13,7 @@ internal class Program
             return;
         }
 
+        //月の入力
         Console.WriteLine("月を入力してください");
         int month = int.Parse(Console.ReadLine());
         if (month < 1 || month > 12)
@@ -20,6 +22,7 @@ internal class Program
             return;
         }
 
+        //日の入力
         Console.WriteLine("日を入力してください");
         int day = int.Parse(Console.ReadLine());
         if (day < 1 || day > DateTime.DaysInMonth(year, month))
@@ -29,10 +32,11 @@ internal class Program
         }
         if(year == 1960 && day < 28 || year == 2050 && day > 22)
         {
-            Console.WriteLine("1960年28日以降、2050年22日以内で入力してください");
+            Console.WriteLine("1960年28日以降、2050年22日以内で入力してください");    //jpnLunisolarcalがこの日付までしか対応していないため
             return;
         }
 
+        //インスタンスの作成
         new LunisolarCalender(year, month, day);
         var rokuyo = new Rokuyo(year, month, day);
 
