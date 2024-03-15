@@ -23,9 +23,9 @@ namespace TakumiTest1
                 );
 
             //閏月の補正
-            if ((leapMonth > 0) && (lunisolarMonth - leapMonth >= 0))
+            if ((leapMonth > 0) && (lunisolarMonth >= leapMonth))   //閏月が0より大きいかつ、旧暦の月が閏月以上
             {
-                lunisolarMonth = lunisolarMonth - 1;              //旧暦月を補正
+                lunisolarMonth = lunisolarMonth--;              //条件に当てはまった旧暦月から1引いた値を代入して旧暦月を補正
             }
 
             return (lunisolarMonth, lunisolarDay);
