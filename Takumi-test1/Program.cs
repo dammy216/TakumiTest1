@@ -36,9 +36,11 @@ internal class Program
             return;
         }
 
-        //インスタンスの作成
-        var rokuyo = new Rokuyo(year, month, day);
+        var dateTime = new DateTime(year, month, day);  //datatimeの作成
+        var rokuyo = new Rokuyo();
 
-        Console.WriteLine($"{year}年{month}月{day}日は{rokuyo.RokuyoResult()}です");
+        rokuyo.GetLunisolarCalender(dateTime);
+
+        Console.WriteLine($"{year}年{month}月{day}日は{rokuyo.RokuyoResult(dateTime)}です");
     }
 }
