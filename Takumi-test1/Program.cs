@@ -37,7 +37,6 @@ internal class Program
         }
 
         //インスタンスの作成
-        new LunisolarCalender(year, month, day);
         var rokuyo = new Rokuyo(year, month, day);
 
         Console.WriteLine($"{year}年{month}月{day}日は{rokuyo.RokuyoResult()}です");
