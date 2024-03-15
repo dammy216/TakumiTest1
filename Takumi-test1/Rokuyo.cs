@@ -32,7 +32,7 @@ namespace TakumiTest1
         }
 
         //六曜の一覧
-        enum RokuyoData
+        public enum RokuyoDate
         {
             大安,
             赤口,
@@ -47,10 +47,11 @@ namespace TakumiTest1
         /// </summary>
         /// <returns>入力された年月日の六曜</returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public string RokuyoResult(DateTime dateTime)
+        private RokuyoDate GetRokuyo(DateTime dateTime)
         {
-            int month = GetLunisolarCalender(dateTime).Item1;   //旧暦の月を代入
-            int day = GetLunisolarCalender(dateTime).Item2;     //旧暦の日を代入
+            (int, int) lunisolarMonthDay = GetLunisolarCalender(dateTime);  //戻り値が複数ある場合は
+            int month = lunisolarMonthDay.Item1;   //旧暦の月を代入
+            int day = lunisolarMonthDay.Item2;     //旧暦の日を代入
 
             int rokuyoIndex = (month + day) % 6;    //旧暦から六曜を求める計算
 
@@ -58,20 +59,31 @@ namespace TakumiTest1
             switch (rokuyoIndex)
             {
                 case 0:
-                    return RokuyoData.大安.ToString();
+                    return (RokuyoDate)rokuyoIndex;
                 case 1:
-                    return RokuyoData.赤口.ToString();
+                    return (RokuyoDate)rokuyoIndex;
                 case 2:
-                    return RokuyoData.先勝.ToString();
+                    return (RokuyoDate)rokuyoIndex;
                 case 3:
-                    return RokuyoData.友引.ToString();
+                    return (RokuyoDate)rokuyoIndex;
                 case 4:
-                    return RokuyoData.先負.ToString();
+                    return (RokuyoDate)rokuyoIndex;
                 case 5:
-                    return RokuyoData.仏滅.ToString();
+                    return (RokuyoDate)rokuyoIndex;
                 default:
                     throw new InvalidOperationException("無効な値です");
             }
+        }
+
+        /// <summary>
+        /// 六曜を文字列に変換するメソッド
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns>string型の六曜</returns>
+        public string GetRokuyoString(DateTime dateTime)
+        {
+            RokuyoDate rokuyo = GetRokuyo(dateTime);
+            return rokuyo.ToString();
         }
 
     }
