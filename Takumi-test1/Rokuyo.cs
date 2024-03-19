@@ -25,7 +25,7 @@ namespace TakumiTest1
             //閏月の補正
             if ((leapMonth > 0) && (lunisolarMonth >= leapMonth))   //閏月が0より大きいかつ、旧暦の月が閏月以上
             {
-                lunisolarMonth = lunisolarMonth--;              //条件に当てはまった旧暦月から1引いた値を代入して旧暦月を補正
+                lunisolarMonth--;              //条件に当てはまった旧暦月から1引いた値を代入して旧暦月を補正
             }
 
             return (lunisolarMonth, lunisolarDay);
@@ -34,12 +34,12 @@ namespace TakumiTest1
         //六曜の一覧
         public enum RokuyoDate
         {
-            大安,
-            赤口,
-            先勝,
-            友引,
-            先負,
-            仏滅
+            Taian,
+            Shakko,
+            Sensho,
+            Tomobiki,
+            Senpu,
+            Butsumetsu,
         }
 
         /// <summary>
@@ -55,24 +55,8 @@ namespace TakumiTest1
 
             int rokuyoIndex = (month + day) % 6;    //旧暦から六曜を求める計算
 
-            //計算結果(余りの値)から対応する六曜を返す処理
-            switch (rokuyoIndex)
-            {
-                case 0:
-                    return (RokuyoDate)rokuyoIndex;
-                case 1:
-                    return (RokuyoDate)rokuyoIndex;
-                case 2:
-                    return (RokuyoDate)rokuyoIndex;
-                case 3:
-                    return (RokuyoDate)rokuyoIndex;
-                case 4:
-                    return (RokuyoDate)rokuyoIndex;
-                case 5:
-                    return (RokuyoDate)rokuyoIndex;
-                default:
-                    throw new InvalidOperationException("無効な値です");
-            }
+            //rokuyoIndexをキャストしてRokuyoDataの数値を紐づける
+            return (RokuyoDate)rokuyoIndex;
         }
 
         /// <summary>
@@ -82,8 +66,24 @@ namespace TakumiTest1
         /// <returns>string型の六曜</returns>
         public string GetRokuyoString(DateTime dateTime)
         {
-            RokuyoDate rokuyo = GetRokuyo(dateTime);
-            return rokuyo.ToString();
+            var rokuyo = GetRokuyo(dateTime);
+            switch (rokuyo)
+            {
+                case RokuyoDate.Taian:
+                    return "大安";
+                case RokuyoDate.Shakko:
+                    return "赤口";
+                case RokuyoDate.Sensho:
+                    return "先勝";
+                case RokuyoDate.Tomobiki:
+                    return "友引";
+                case RokuyoDate.Senpu:
+                    return "先負";
+                case RokuyoDate.Butsumetsu:
+                    return "仏滅";
+                default:
+                    throw new InvalidOperationException("無効な値です");
+            }
         }
 
     }

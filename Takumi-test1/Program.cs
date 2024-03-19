@@ -6,7 +6,13 @@ internal class Program
     {
         //年の入力
         Console.WriteLine("年を入力してください");
-        int.TryParse(Console.ReadLine(), out int year); //tryparseで変換可能か確認する
+        bool isYearConvert = int.TryParse(Console.ReadLine(), out int year); //tryparseで変換可能か確認する
+
+        if (!isYearConvert)
+        {
+            Console.WriteLine("不正な値です");
+            return;
+        }
         if (year < 1960 || year > 2050)
         {
             Console.WriteLine("1960年から2050年までを入力してください");
@@ -15,7 +21,13 @@ internal class Program
 
         //月の入力
         Console.WriteLine("月を入力してください");
-        int.TryParse(Console.ReadLine(), out int month);
+        bool isMonthConvert = int.TryParse(Console.ReadLine(), out int month);
+
+        if (!isMonthConvert)
+        {
+            Console.WriteLine("不正な値です");
+            return;
+        }
         if (month < 1 || month > 12)
         {
             Console.WriteLine("1月から12月までを入力してください");
@@ -24,7 +36,13 @@ internal class Program
 
         //日の入力
         Console.WriteLine("日を入力してください");
-        int.TryParse(Console.ReadLine(), out int day);
+        bool isDayConvert = int.TryParse(Console.ReadLine(), out int day);
+
+        if (!isDayConvert)
+        {
+            Console.WriteLine("不正な値です");
+            return;
+        }
         if (day < 1 || day > DateTime.DaysInMonth(year, month))
         {
             Console.WriteLine("月の規定日内で入力してください");
